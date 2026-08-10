@@ -1,0 +1,26 @@
+# Node dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.next/
+out/
+build/
+coverage/
+
+# Environment files
+.env
+.env*.local
+!.env.example
+
+# Worktrees directory (CRITICAL FOR WORKTREE ISOLATION)
+.worktrees/
+worktrees/
+../Expense_Management_worktrees/
+
+# IDE & OS
+.DS_Store
+.idea/
+.vscode/
+*.log
