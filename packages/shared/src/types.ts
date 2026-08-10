@@ -26,6 +26,32 @@ export interface AuthResponseData {
   accessToken: string;
 }
 
+export interface CashFlowChartItem {
+  month: string;
+  income: number;
+  expense: number;
+  netSavings: number;
+}
+
+export interface DashboardOverviewDto {
+  netBalance: string;
+  monthlyIncome: string;
+  monthlyExpense: string;
+  monthlySavings: string;
+  safeToSpend: string;
+  dailySafeSpend: string;
+  recentTransactions: Array<{
+    id: string;
+    accountName: string;
+    categoryName: string;
+    type: TransactionType;
+    amount: string;
+    transactionDate: string;
+    note?: string;
+  }>;
+  cashFlowTrend: CashFlowChartItem[];
+}
+
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;
