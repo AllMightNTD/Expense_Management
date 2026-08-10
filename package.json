@@ -8,6 +8,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:all": "./scripts/start.sh",
+    "test:all": "./scripts/test-all.sh",
     "lint": "turbo lint",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
