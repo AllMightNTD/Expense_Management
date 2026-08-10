@@ -37,7 +37,7 @@ export class SavingGoalsService {
       orderBy: { createdAt: 'desc' },
       include: {
         contributions: {
-          orderBy: { createdAt: 'desc' },
+          orderBy: { contributedAt: 'desc' },
         },
       },
     });
