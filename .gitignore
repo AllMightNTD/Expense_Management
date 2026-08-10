@@ -24,3 +24,4 @@ worktrees/
 .idea/
 .vscode/
 *.log
+.turbo/
