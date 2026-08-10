@@ -9,6 +9,7 @@
 **Tech Stack:** NestJS 10, Prisma ORM, PostgreSQL 16 (BigInt minor units), Next.js 14 App Router, React Query, Shadcn UI / Tailwind CSS, Zod, Vitest.
 
 ## Global Constraints
+
 - Worktree location: `../Expense_Management_worktrees/accounts-transactions` on branch `feature/accounts-transactions`.
 - Account balances and transaction amounts must use integer minor units (`BigInt`).
 - Transfers move funds between accounts (`transferFromAccountId` -> `transferToAccountId`) without altering total net worth or counting as income/expense.
@@ -21,6 +22,7 @@
 ### Task 1: Shared Schemas & DTO Contracts (`packages/shared`)
 
 **Files:**
+
 - Create: `packages/shared/src/schemas/account.schema.ts`
 - Create: `packages/shared/src/schemas/category.schema.ts`
 - Create: `packages/shared/src/schemas/transaction.schema.ts`
@@ -28,42 +30,43 @@
 - Modify: `packages/shared/src/index.ts`
 
 **Interfaces:**
+
 - Consumes: Zod library
 - Produces: `AccountSchema`, `CategorySchema`, `TransactionSchema`, `TransactionFilterSchema`
 
 - [ ] **Step 1: Write failing test in `packages/shared/src/schemas/finance.schema.spec.ts`**
 
 ```typescript
-import { describe, it, expect } from 'vitest';
-import { AccountSchema, TransactionSchema } from './index';
+import { describe, it, expect } from "vitest";
+import { AccountSchema, TransactionSchema } from "./index";
 
-describe('Financial Entity Schemas', () => {
-  it('validates account creation input', () => {
+describe("Financial Entity Schemas", () => {
+  it("validates account creation input", () => {
     const res = AccountSchema.safeParse({
-      name: 'Vietcombank',
-      type: 'BANK',
+      name: "Vietcombank",
+      type: "BANK",
       initialBalance: 10000000,
     });
     expect(res.success).toBe(true);
   });
 
-  it('validates expense transaction payload', () => {
+  it("validates expense transaction payload", () => {
     const res = TransactionSchema.safeParse({
-      accountId: 'acc-123',
-      categoryId: 'cat-456',
-      type: 'EXPENSE',
+      accountId: "acc-123",
+      categoryId: "cat-456",
+      type: "EXPENSE",
       amount: 150000,
       transactionDate: new Date().toISOString(),
-      note: 'Cà phê sáng',
+      note: "Cà phê sáng",
     });
     expect(res.success).toBe(true);
   });
 
-  it('validates transfer transaction payload requiring transferToAccountId', () => {
+  it("validates transfer transaction payload requiring transferToAccountId", () => {
     const res = TransactionSchema.safeParse({
-      accountId: 'acc-123',
-      transferToAccountId: 'acc-789',
-      type: 'TRANSFER',
+      accountId: "acc-123",
+      transferToAccountId: "acc-789",
+      type: "TRANSFER",
       amount: 3000000,
       transactionDate: new Date().toISOString(),
     });
@@ -93,6 +96,7 @@ git commit -m "feat(shared): add Zod validation schemas for Accounts, Categories
 ### Task 2: NestJS Accounts & Categories Modules (`apps/api`)
 
 **Files:**
+
 - Create: `apps/api/src/modules/accounts/accounts.service.ts`
 - Create: `apps/api/src/modules/accounts/accounts.controller.ts`
 - Create: `apps/api/src/modules/accounts/accounts.module.ts`
@@ -102,6 +106,7 @@ git commit -m "feat(shared): add Zod validation schemas for Accounts, Categories
 - Modify: `apps/api/src/app.module.ts`
 
 **Interfaces:**
+
 - Consumes: PrismaService, JwtAuthGuard
 - Produces: Account CRUD (`/accounts`) and Category CRUD + Seed default categories (`/categories`)
 
@@ -130,12 +135,14 @@ git commit -m "feat(api): implement AccountsModule and CategoriesModule with def
 ### Task 3: Atomic Transaction Processing Engine (`apps/api`)
 
 **Files:**
+
 - Create: `apps/api/src/modules/transactions/transactions.service.ts`
 - Create: `apps/api/src/modules/transactions/transactions.controller.ts`
 - Create: `apps/api/src/modules/transactions/transactions.module.ts`
 - Modify: `apps/api/src/app.module.ts`
 
 **Interfaces:**
+
 - Consumes: PrismaService (`prisma.$transaction`), AccountsService
 - Produces: Atomic transaction creation, refund processing, transfers, soft-deletions, and paginated query engine (`GET /transactions`)
 
@@ -203,12 +210,14 @@ git commit -m "feat(api): implement atomic Transaction engine with ACID balance 
 ### Task 4: Next.js Accounts & Transactions Management UI (`apps/web`)
 
 **Files:**
+
 - Create: `apps/web/app/accounts/page.tsx`
 - Create: `apps/web/app/transactions/page.tsx`
 - Create: `apps/web/components/transactions/transaction-table.tsx`
 - Create: `apps/web/components/transactions/add-transaction-modal.tsx`
 
 **Interfaces:**
+
 - Consumes: `/api/v1/accounts`, `/api/v1/categories`, `/api/v1/transactions`
 - Produces: Accounts manager grid, Paginated transaction data table with search, category filters, and quick transaction modal
 
@@ -237,6 +246,7 @@ git commit -m "feat(web): add Accounts management and Paginated Transaction Data
 ### Task 5: Baseline Verification & Integration Test
 
 **Interfaces:**
+
 - Consumes: Entire Phase 2 monorepo setup
 - Produces: Verified unit tests and production builds across packages
 
