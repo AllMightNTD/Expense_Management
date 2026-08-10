@@ -5,7 +5,7 @@ echo "🚀 [1/4] Starting PostgreSQL 16 & Redis 7 containers..."
 docker compose -f docker/docker-compose.yml up -d
 
 echo "⌛ [2/4] Waiting for PostgreSQL database connection..."
-until docker exec expense_postgres pg_isready -U postgres > /dev/null 2>&1; do
+until docker exec personal-finance-postgres pg_isready -U postgres > /dev/null 2>&1; do
   sleep 1
 done
 echo "✅ Database PostgreSQL ready!"
