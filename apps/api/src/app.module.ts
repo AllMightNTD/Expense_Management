@@ -8,6 +8,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BudgetsModule } from './modules/budgets/budgets.module';
 import { SavingGoalsModule } from './modules/saving-goals/saving-goals.module';
+import { InsightsModule } from './modules/insights/insights.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SavingGoalsModule } from './modules/saving-goals/saving-goals.module';
     DashboardModule,
     BudgetsModule,
     SavingGoalsModule,
+    InsightsModule,
   ],
   controllers: [],
   providers: [],
