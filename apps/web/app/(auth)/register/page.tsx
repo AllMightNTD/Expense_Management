@@ -15,15 +15,17 @@ export default function RegisterPage() {
     setErrorMsg('');
     setLoading(true);
 
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
     try {
-      const res = await fetch('http://localhost:3002/api/v1/auth/register', {
+      const res = await fetch(`${baseUrl}/api/v1/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, displayName }),
       });
       const json = await res.json();
       if (!json.success) {
-        setErrorMsg(json.error?.message || 'Đăng ký thất bại');
+        setErrorMsg(json.error?.message || json.message || 'Đăng ký thất bại');
       } else {
         window.location.href = '/onboarding';
       }
