@@ -7,6 +7,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BudgetsModule } from './modules/budgets/budgets.module';
+import { SavingGoalsModule } from './modules/saving-goals/saving-goals.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { BudgetsModule } from './modules/budgets/budgets.module';
     TransactionsModule,
     DashboardModule,
     BudgetsModule,
+    SavingGoalsModule,
   ],
   controllers: [],
   providers: [],

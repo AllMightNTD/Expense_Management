@@ -5,3 +5,4 @@ export * from './schemas/account.schema';
 export * from './schemas/category.schema';
 export * from './schemas/transaction.schema';
 export * from './schemas/budget.schema';
+export * from './schemas/saving-goal.schema';
